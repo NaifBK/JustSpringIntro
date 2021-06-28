@@ -1,0 +1,36 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class DataReaderClient {
+    private FileReader fileReader = null;
+    private String fileName = "//Users/naifalkhathlan/Desktop/Optiim/JustSpring/ObjectCoupling/myfile.rtf";
+
+    public DataReaderClient() throws FileNotFoundException {
+        fileReader = new FileReader(fileName);
+    }
+
+    private String fetchData() {
+        return fileReader.read();
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        DataReaderClient dataReader = new DataReaderClient();
+        System.out.println("Got Data: " + dataReader.fetchData());
+    }
+}
+
+class FileReader{
+    private StringBuilder builder = null;
+    private Scanner scanner = null;
+    public FileReader(String filename) throws FileNotFoundException {
+        scanner = new Scanner(new File(filename));
+        builder = new StringBuilder();
+    }
+    public String read(){
+        while (scanner.hasNext()) {
+            builder.append(scanner.next());
+        }
+        return builder.toString();
+    }
+}
